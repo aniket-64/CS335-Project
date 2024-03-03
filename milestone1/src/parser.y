@@ -23,10 +23,9 @@
 
 %token<node>  BREAK CONTINUE RETURN GLOBAL NONLOCAL ASSERT CLASS DEF IF ELIF ELSE WHILE FOR IN NONE TRUE FALSE OR AND NOT IS ASYNC INDENT DEDENT
 
-%token<node> LEFT_PAREN RIGHT_PAREN LEFT_BRACKET RIGHT_BRACKET ARROW SEMICOLON COLON EQUAL PLUS_EQUAL MINUS_EQUAL MULTIPLY_EQUAL RATE_EQUAL DIVIDE_EQUAL REMAINDER_EQUAL BITWISE_AND_EQUAL BITWISE_OR_EQUAL BITWISE_XOR_EQUAL LEFT_SHIFT_EQUAL RIGHT_SHIFT_EQUAL POWER_EQUAL INTEGER_DIVIDE INTEGER_DIVIDE_EQUAL COMMA PERIOD /*ELLIPSIS*/ MULTIPLY RATE DIVIDE POWER BITWISE_OR PLUS MINUS EQUAL_EQUAL NOT_EQUAL LESS_THAN_EQUAL LESS_THAN GREATER_THAN_EQUAL GREATER_THAN BITWISE_AND BITWISE_XOR REMAINDER BITWISE_NOT
+%token<node> LEFT_PAREN RIGHT_PAREN LEFT_BRACKET RIGHT_BRACKET ARROW SEMICOLON COLON EQUAL PLUS_EQUAL MINUS_EQUAL MULTIPLY_EQUAL RATE_EQUAL DIVIDE_EQUAL REMAINDER_EQUAL BITWISE_AND_EQUAL BITWISE_OR_EQUAL BITWISE_XOR_EQUAL LEFT_SHIFT_EQUAL RIGHT_SHIFT_EQUAL POWER_EQUAL INTEGER_DIVIDE INTEGER_DIVIDE_EQUAL COMMA PERIOD  MULTIPLY RATE DIVIDE POWER BITWISE_OR PLUS MINUS EQUAL_EQUAL NOT_EQUAL LESS_THAN_EQUAL LESS_THAN GREATER_THAN_EQUAL GREATER_THAN BITWISE_AND BITWISE_XOR REMAINDER BITWISE_NOT
 %token<node> NUMBER NEWLINE NAME STRING_LITERAL LEFT_SHIFT RIGHT_SIHFT
-/* %token<node> INT FLOAT BOOL STR LIST */
-%type<node> file_input NEWLINE_or_stmt funcdef /*arrow_type_hint*/ ARROW_test_or_not parameters typedargslist_or_not typedargslist tfpdef COMMA_tfpdef_EQUAL_test_or_not_kleene /*COLON_type_hint_or_not*/ COLON_test_or_not COMMA_or_not EQUAL_test_or_not stmt simple_stmt SEMICOLON_small_stmt_kleene small_stmt expr_stmt EQUAL_testlist_star_expr_kleene annassign SEMICOLON_or_not testlist_star_expr test_or_star_expr augassign flow_stmt break_stmt continue_stmt return_stmt testlist_or_not global_stmt nonlocal_stmt assert_stmt COMMA_test_or_not compound_stmt if_stmt ELIF_test_COLON_suite_kleene while_stmt for_stmt ELSE_COLON_suite_or_not suite stmt_plus test IF_or_test_ELSE_test_or_not test_nocond or_test and_test not_test comparison comp_op star_expr expr xor_expr and_expr shift_expr LEFT_SHIFT_or_RIGHT_SIHFT arith_expr PLUS_or_MINUS term MULTIPLY_or_RATE_or_DIVIDE_or_REMAINDER_or_INTEGER_DIVIDE factor PLUS_or_MINUS_or_BITWISE_NOT power POWER_factor_or_not atom_expr atom STRING_plus testlist_comp COMMA_test_or_star_expr_kleene testlist_comp_or_not trailer subscriptlist COMMA_subscript_kleene subscript exprlist COMMA_expr_or_star_expr_kleene expr_or_star_expr testlist COMMA_test_kleene classdef LEFT_PAREN_arglist_or_not_RIGHT_PAREN_or_not arglist_or_not arglist COMMA_argument_kleene argument comp_for_or_not comp_iter comp_for comp_if comp_iter_or_not ASYNC_or_not file_input_final /* type_hint*/
+%type<node> file_input NEWLINE_or_stmt funcdef  ARROW_test_or_not parameters typedargslist_or_not typedargslist tfpdef COMMA_tfpdef_EQUAL_test_or_not_kleene COLON_test_or_not COMMA_or_not EQUAL_test_or_not stmt simple_stmt SEMICOLON_small_stmt_kleene small_stmt expr_stmt EQUAL_testlist_star_expr_kleene annassign SEMICOLON_or_not testlist_star_expr test_or_star_expr augassign flow_stmt break_stmt continue_stmt return_stmt testlist_or_not global_stmt nonlocal_stmt assert_stmt COMMA_test_or_not compound_stmt if_stmt ELIF_test_COLON_suite_kleene while_stmt for_stmt ELSE_COLON_suite_or_not suite stmt_plus test IF_or_test_ELSE_test_or_not test_nocond or_test and_test not_test comparison comp_op star_expr expr xor_expr and_expr shift_expr LEFT_SHIFT_or_RIGHT_SIHFT arith_expr PLUS_or_MINUS term MULTIPLY_or_RATE_or_DIVIDE_or_REMAINDER_or_INTEGER_DIVIDE factor PLUS_or_MINUS_or_BITWISE_NOT power POWER_factor_or_not atom_expr atom STRING_plus testlist_comp COMMA_test_or_star_expr_kleene testlist_comp_or_not trailer subscriptlist COMMA_subscript_kleene subscript exprlist COMMA_expr_or_star_expr_kleene expr_or_star_expr testlist COMMA_test_kleene classdef LEFT_PAREN_arglist_or_not_RIGHT_PAREN_or_not arglist_or_not arglist COMMA_argument_kleene argument comp_for_or_not comp_iter comp_for comp_if comp_iter_or_not ASYNC_or_not file_input_final 
 
 %%
 
@@ -87,8 +86,7 @@ typedargslist_or_not    : typedargslist         {
                             $$ = NULL;
 }
 
-typedargslist   : 
-                tfpdef EQUAL_test_or_not COMMA_tfpdef_EQUAL_test_or_not_kleene COMMA  {
+typedargslist   : tfpdef EQUAL_test_or_not COMMA_tfpdef_EQUAL_test_or_not_kleene COMMA  {
                     
                     if($1==NULL && $2==NULL && $3==NULL) $$=$4;
                     else
@@ -289,20 +287,6 @@ annassign   : COLON test EQUAL_test_or_not  {
                         $$->add_child_back($3);
 }
 
-/* type_hint   : INT { $$ = $1; }
-            | FLOAT { $$ = $1; }
-            | BOOL { $$ = $1; }
-            | STR { $$ = $1; }
-            | LIST LEFT_BRACKET type_hint RIGHT_BRACKET {
-                $$ = new Node(node_num++, "type_hint", yylineno);
-                $$->add_child_back($1);
-                $$->add_child_back($2);
-                $$->add_child_back($3);
-                $$->add_child_back($4);
-}
-            | test {
-                $$ = $1;
-} */
 
 
 SEMICOLON_or_not    : SEMICOLON {$$=$1;}
@@ -539,33 +523,18 @@ IF_or_test_ELSE_test_or_not : IF or_test ELSE test  {
 
 test_nocond : or_test {$$=$1;}
 
-//--------------------------------------DOUBT------------------------------------------------
 or_test : and_test  {                            
     
                 $$ = $1;
 }
         | or_test OR and_test  {
 
-                // if($1==NULL || $1->name!="or_test")
-                // {
-                //     $$=new Node(node_num++, "or_test", yylineno);
-                //     $$->add_child_back($1);
-                //     $$->add_child_back($2);
-                //     $$->add_child_back($3);
-                // }
-                // else
-                // {
-                //     $1->add_child_back($2);
-                //     $1->add_child_back($3);
-                //     $$ = $1;
-                // }
 
                 $2->add_child_back($1);
                 $2->add_child_back($3);
                 $$=$2;
 }
 
-//--------------------------------------DOUBT------------------------------------------------
 and_test    : not_test {                           
     
                 $$ = $1;
@@ -573,39 +542,12 @@ and_test    : not_test {
 
             | and_test AND not_test {
 
-                // if($1==NULL || $1->name!="and_test")
-                // {
-                //     $$=new Node(node_num++, "and_test", yylineno);
-
-                //     $$->add_child_back($1);
-                //     $$->add_child_back($2);
-                //     $$->add_child_back($3);
-                // }
-                // else
-                // {
-                //     $1->add_child_back($2);
-                //     $1->add_child_back($3);
-
-                //     $$ = $1;
-                // }
                 $2->add_child_back($1);
                 $2->add_child_back($3);
                 $$=$2;
 }
 
-//--------------------------------------DOUBT------------------------------------------------
 not_test    : NOT not_test {
-                // if($2==NULL || $2->name!="not_test")
-                // {
-                //     $$=new Node(node_num++, "not_test", yylineno);
-                //     $$->add_child_back($1);
-                //     $$->add_child_back($2);
-                // }
-                // else
-                // {
-                //     $2->add_child_front($1);
-                //     $$=$1;
-                // }
                 $1->add_child_back($2);
                 $$=$1;
 }
@@ -797,9 +739,9 @@ atom    : LEFT_PAREN  testlist_comp_or_not RIGHT_PAREN {
 
 STRING_plus : STRING_plus STRING_LITERAL  {
 
-                    if($1->name!="STRINGS")
+                    if($1->name!="strings")
                     {
-                        $$=new Node(node_num++, "STRINGS", yylineno);
+                        $$=new Node(node_num++, "strings", yylineno);
                         $$->add_child_back($1);
                         $$->add_child_back($2);
                     }
@@ -1064,7 +1006,6 @@ argument    : test comp_for_or_not {
                         
                 }
 }
-//-----------------------------------DOUBT-----------------------------
             | test EQUAL test {
 
 
@@ -1074,25 +1015,6 @@ argument    : test comp_for_or_not {
                 $$->add_child_back($3);
                         
 }
-/* //-----------------------------------DOUBT-----------------------------
-            | POWER test {
-
-
-                $$ = new Node(node_num++, "argument", yylineno);
-                $$->add_child_back($1);
-                $$->add_child_back($2);
-                
-}
-//-----------------------------------DOUBT-----------------------------
-            | MULTIPLY test  {
-
-
-                $$ = new Node(node_num++, "argument", yylineno);
-                $$->add_child_back($1);
-                $$->add_child_back($2);
-                        
-
-} */
 
 comp_for_or_not : comp_for {$$=$1;}
                 | %empty {$$=NULL;}

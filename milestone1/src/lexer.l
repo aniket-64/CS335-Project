@@ -70,12 +70,10 @@ LONG_STRING                                                             ("\'\'\'
 
 
 EOL                                                                     ([\n])|([\r][\n])
-/* LONG_STRING_CHAR                                                        [^\\] */
-SHORT_STRING_CHAR_SINGLE                                                       [^\\\n\'\r]
-SHORT_STRING_CHAR_DOUBLE                                                       [^\\\n\"\r]
-/* LONG_STRING_ITEM                                                        {LONG_STRING_CHAR}|{STRING_ESCAPE_SEQ} */
-SHORT_STRING_ITEM_SINGLE                                                       {SHORT_STRING_CHAR_SINGLE}|{STRING_ESCAPE_SEQ}
-SHORT_STRING_ITEM_DOUBLE                                                       {SHORT_STRING_CHAR_DOUBLE}|{STRING_ESCAPE_SEQ}
+SHORT_STRING_CHAR_SINGLE                                                [^\\\n\'\r]
+SHORT_STRING_CHAR_DOUBLE                                                [^\\\n\"\r]
+SHORT_STRING_ITEM_SINGLE                                                {SHORT_STRING_CHAR_SINGLE}|{STRING_ESCAPE_SEQ}
+SHORT_STRING_ITEM_DOUBLE                                                {SHORT_STRING_CHAR_DOUBLE}|{STRING_ESCAPE_SEQ}
 SHORT_STRING                                                            ("\'"{SHORT_STRING_ITEM_SINGLE}*"\'")|("\""{SHORT_STRING_ITEM_DOUBLE}*"\"")
 STRING_PREFIX                                                           ("r"|"u"|"R"|"U"|"f"|"F"|"fr"|"Fr"|"fR"|"FR"|"rf"|"rF"|"Rf"|"RF")
 STRING_LITERAL                                                          {STRING_PREFIX}?({SHORT_STRING}|{LONG_STRING})
@@ -248,7 +246,6 @@ WHITE_SPACE                                                             [ \t\f\r
 ")" {  
         bracket_count--;
         yylval.node=new Node(node_num++, "DELIMITER", yylineno, yytext);
-        // cout<<"rigt paren"<<endl;
         return RIGHT_PAREN; 
 }
 "[" {  
@@ -419,42 +416,63 @@ WHITE_SPACE                                                             [ \t\f\r
 }
 
 
-{DEC_INTEGER}|{BIN_INTEGER}|{OCT_INTEGER}|{HEX_INTEGER}|{FLOAT_NUMBER}|{IMAGINARY_NO}					{ 
-                                                                                                            yylval.node = new Node(node_num++, "NUMBER", yylineno, yytext);
-                                                                                                            return NUMBER; 
-                                                                                                        }
+{DEC_INTEGER}|{BIN_INTEGER}|{OCT_INTEGER}|{HEX_INTEGER}|{FLOAT_NUMBER}|{IMAGINARY_NO}   { 
 
-{NAMES}                                                                 {
-                                                                            yylval.node = new Node(node_num++, "NAME", yylineno, yytext);
-                                                                            // cout<<"name found: "<<yytext<<endl;
-                                                                            return NAME; 
-                                                                        }
-({EOL}{EXTRA_THINGS})/([\n])	                                                             {}	
-({EOL}{EXTRA_THINGS})/([\r][\n])	                                                             {}	
-    /* ({EOL}{EXTRA_THINGS})/([\r])	                                                             {cout<<"3"<<endl;}	 */
+                                        yylval.node = new Node(node_num++, "NUMBER", yylineno, yytext);
+                                        return NUMBER; 
+}
 
-{INDENT}                                                                { 
+{NAMES}                             {
+                                        yylval.node = new Node(node_num++, "NAME", yylineno, yytext);
+                                        return NAME; 
+}
+
+({EOL}{EXTRA_THINGS})/([\n])        {
+
+}	
+({EOL}{EXTRA_THINGS})/([\r][\n])    {
+
+}	
+{INDENT}                            { 
 												
-                                                                            if(!bracket_count) {indent_handle(yytext); return NEWLINE;}
-                                                                        }
+                                        if(!bracket_count) 
+                                        {
+                                            indent_handle(yytext); 
+                                            return NEWLINE;
+                                        }
+}
 
-^({EXTRA_THINGS})/([\n])	                                                             {}	
-^({EXTRA_THINGS})/([\r][\n])	                                                             {}	
-    /* ^({EXTRA_THINGS})/([\r])	                                                             {cout<<"6"<<endl;}	 */
+^({EXTRA_THINGS})/([\n])            {
+
+}	
+^({EXTRA_THINGS})/([\r][\n])        {
+
+}	
 
                                                                             
-{STRING_LITERAL}                                                        { 
-                                                                            yylval.node = new Node(node_num++, "STRING_LITERAL", yylineno, modified(yytext));
-                                                                            // cout<<"string: "<<yytext<<endl;
-                                                                            return STRING_LITERAL;
-                                                                        }
+{STRING_LITERAL}                    { 
+                                        yylval.node = new Node(node_num++, "STRING_LITERAL", yylineno, modified(yytext));
+                                        return STRING_LITERAL;
+}
 
-{COMMENT}                                                               {}
+{COMMENT}                           {
 
-{EXPLICT_LINE_JOINING}                                                  {}
+}
 
-^(([ \t])+)                                                               {if(yylineno==1) yyerror("Indentation error");}
+{EXPLICT_LINE_JOINING}              {
 
-{WHITE_SPACE}                                                           {}
+}
 
-.																		{yyerror("Invalid token/Illegal character: " + (string)(yytext) );}
+^(([ \t])+)                         {
+                                        if(yylineno==1) 
+                                            yyerror("Indentation error");
+}
+
+{WHITE_SPACE}                       {
+
+}
+
+.                                   {
+                                        yyerror("Invalid token/Illegal character: " + (string)(yytext) );
+}
+                                                                                    
