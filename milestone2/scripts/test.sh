@@ -11,8 +11,12 @@ search_and_parse() {
             echo
             echo "Testing $item"
 	    output_file="${item/#$1/$2}"
+	    output_folder="${output_file%.py}"
+	    mkdir "../out/$output_folder"
             output_file="${output_file%.py}.out"
             $parser "$item" "-output" "$output_file"
+	    mv *.csv "../out/$output_folder"
+	    mv "$output_file" "../out/$output_folder" 
             echo "Made $output_file"
             echo
         fi
