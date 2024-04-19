@@ -22,7 +22,7 @@ void resolve_names(vector<quad> &tac_func)
                     }
                     else
                     {   
-                        offset_calc+=temp.op1_entry->container_st->size_of_params+16;
+                        offset_calc+=temp.op1_entry->container_st->size_of_params+16 + 40;
                         offset_calc=-offset_calc;
 
                     }
@@ -212,6 +212,12 @@ void generate_x86(vector<quad> &tac, string output_filename)
             case BEGINFUNC:
             {
                 x86.push_back("\tpushq %rbp");
+
+                x86.push_back("\tpushq %rbx");
+                x86.push_back("\tpushq %r12");
+                x86.push_back("\tpushq %r13");
+                x86.push_back("\tpushq %r14");
+                x86.push_back("\tpushq %r15");
                 x86.push_back("\tmovq %rsp, %rbp");
                 x86.push_back("\tsubq "+temp.op2+", %rsp");
 
@@ -431,7 +437,16 @@ void generate_x86(vector<quad> &tac, string output_filename)
                 {
                     x86.push_back("\tmovq "+temp.op1+ ", %rax");
                 }
-                x86.push_back("\tleave");
+
+                x86.push_back("\tmovq %rbp, %rsp");
+                x86.push_back("\tpopq %r15");
+                x86.push_back("\tpopq %r14");
+                x86.push_back("\tpopq %r13");
+                x86.push_back("\tpopq %r12");
+                x86.push_back("\tpopq %rbx");
+
+                // x86.push_back("\tleave");
+                x86.push_back("\tpopq %rbp");
                 x86.push_back("\tret");
                 break;
             }

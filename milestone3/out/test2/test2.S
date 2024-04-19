@@ -21,9 +21,14 @@ str9: .asciz "CA001"
 
 BankAccount.__init__:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $48, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -16(%rbp)
@@ -31,12 +36,12 @@ BankAccount.__init__:
 	movq -16(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -16(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -24(%rbp)
 	movq -16(%rbp), %rdx
 	movq -24(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -32(%rbp)
 	movq -32(%rbp), %rdx
 	movq %rdx, -40(%rbp)
@@ -44,19 +49,30 @@ BankAccount.__init__:
 	movq -40(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -40(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -48(%rbp)
 	movq -40(%rbp), %rdx
 	movq -48(%rbp), %rcx
 	movq %rcx, (%rdx)
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 BankAccount.deposit:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $80, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -16(%rbp)
@@ -67,7 +83,7 @@ BankAccount.deposit:
 	movq -16(%rbp), %rdx
 	movq (%rdx), %rcx
 	movq %rcx, -24(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -32(%rbp)
 	movq -24(%rbp), %rcx
 	movq -32(%rbp), %rdx
@@ -105,7 +121,7 @@ BankAccount.deposit:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -56(%rbp)
 	pushq %rax
 	pushq %rcx
@@ -134,7 +150,7 @@ BankAccount.deposit:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -64(%rbp)
 	movq -64(%rbp), %rdx
 	movq %rdx, -72(%rbp)
@@ -172,14 +188,25 @@ BankAccount.deposit:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 BankAccount.withdraw:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $120, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -16(%rbp)
@@ -190,7 +217,7 @@ BankAccount.withdraw:
 	movq -16(%rbp), %rdx
 	movq (%rdx), %rcx
 	movq %rcx, -24(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -32(%rbp)
 	movq -24(%rbp), %rdx
 	movq -32(%rbp), %rcx
@@ -201,7 +228,7 @@ BankAccount.withdraw:
 	movq -24(%rbp), %rdx
 	cmpq $0, %rdx
 	je L0
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -40(%rbp)
 	movq -40(%rbp), %rdx
 	movq %rdx, -48(%rbp)
@@ -212,7 +239,7 @@ BankAccount.withdraw:
 	movq -48(%rbp), %rdx
 	movq (%rdx), %rcx
 	movq %rcx, -56(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -64(%rbp)
 	movq -56(%rbp), %rcx
 	movq -64(%rbp), %rdx
@@ -250,7 +277,7 @@ BankAccount.withdraw:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -88(%rbp)
 	pushq %rax
 	pushq %rcx
@@ -279,7 +306,7 @@ BankAccount.withdraw:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -96(%rbp)
 	movq -96(%rbp), %rdx
 	movq %rdx, -104(%rbp)
@@ -349,11 +376,22 @@ L0:
 	popq %rcx
 	popq %rax
 L1:
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 BankAccount.display:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $56, %rsp
 	lea str3(%rip), %rdx
@@ -385,7 +423,7 @@ BankAccount.display:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -16(%rbp)
 	movq -16(%rbp), %rdx
 	movq %rdx, -24(%rbp)
@@ -423,7 +461,7 @@ BankAccount.display:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -40(%rbp)
 	movq -40(%rbp), %rdx
 	movq %rdx, -48(%rbp)
@@ -461,14 +499,25 @@ BankAccount.display:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 SavingsAccount.__init__:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $72, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -16(%rbp)
@@ -476,12 +525,12 @@ SavingsAccount.__init__:
 	movq -16(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -16(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -24(%rbp)
 	movq -16(%rbp), %rdx
 	movq -24(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -32(%rbp)
 	movq -32(%rbp), %rdx
 	movq %rdx, -40(%rbp)
@@ -489,12 +538,12 @@ SavingsAccount.__init__:
 	movq -40(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -40(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -48(%rbp)
 	movq -40(%rbp), %rdx
 	movq -48(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -56(%rbp)
 	movq -56(%rbp), %rdx
 	movq %rdx, -64(%rbp)
@@ -502,19 +551,30 @@ SavingsAccount.__init__:
 	movq -64(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -64(%rbp)
-	movq 40(%rbp), %rdx
+	movq 80(%rbp), %rdx
 	movq %rdx, -72(%rbp)
 	movq -64(%rbp), %rdx
 	movq -72(%rbp), %rcx
 	movq %rcx, (%rdx)
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 SavingsAccount.add_interest:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $144, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -16(%rbp)
 	movq -16(%rbp), %rdx
 	movq %rdx, -24(%rbp)
@@ -525,7 +585,7 @@ SavingsAccount.add_interest:
 	movq -24(%rbp), %rdx
 	movq (%rdx), %rcx
 	movq %rcx, -32(%rbp)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -40(%rbp)
 	movq -40(%rbp), %rdx
 	movq %rdx, -48(%rbp)
@@ -549,7 +609,7 @@ SavingsAccount.add_interest:
 	movq %rcx, -32(%rbp)
 	movq -32(%rbp), %rdx
 	movq %rdx, -8(%rbp)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -72(%rbp)
 	movq -72(%rbp), %rdx
 	movq %rdx, -80(%rbp)
@@ -627,7 +687,7 @@ SavingsAccount.add_interest:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -128(%rbp)
 	movq -128(%rbp), %rdx
 	movq %rdx, -136(%rbp)
@@ -665,14 +725,25 @@ SavingsAccount.add_interest:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 CheckingAccount.__init__:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $72, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -16(%rbp)
@@ -680,12 +751,12 @@ CheckingAccount.__init__:
 	movq -16(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -16(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -24(%rbp)
 	movq -16(%rbp), %rdx
 	movq -24(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -32(%rbp)
 	movq -32(%rbp), %rdx
 	movq %rdx, -40(%rbp)
@@ -693,12 +764,12 @@ CheckingAccount.__init__:
 	movq -40(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -40(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -48(%rbp)
 	movq -40(%rbp), %rdx
 	movq -48(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -56(%rbp)
 	movq -56(%rbp), %rdx
 	movq %rdx, -64(%rbp)
@@ -706,19 +777,30 @@ CheckingAccount.__init__:
 	movq -64(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -64(%rbp)
-	movq 40(%rbp), %rdx
+	movq 80(%rbp), %rdx
 	movq %rdx, -72(%rbp)
 	movq -64(%rbp), %rdx
 	movq -72(%rbp), %rcx
 	movq %rcx, (%rdx)
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 CheckingAccount.withdraw:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $144, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -16(%rbp)
@@ -729,7 +811,7 @@ CheckingAccount.withdraw:
 	movq -16(%rbp), %rdx
 	movq (%rdx), %rcx
 	movq %rcx, -24(%rbp)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -32(%rbp)
 	movq -32(%rbp), %rdx
 	movq %rdx, -40(%rbp)
@@ -744,7 +826,7 @@ CheckingAccount.withdraw:
 	movq -48(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -24(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -56(%rbp)
 	movq -24(%rbp), %rdx
 	movq -56(%rbp), %rcx
@@ -755,7 +837,7 @@ CheckingAccount.withdraw:
 	movq -24(%rbp), %rdx
 	cmpq $0, %rdx
 	je L2
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -64(%rbp)
 	movq -64(%rbp), %rdx
 	movq %rdx, -72(%rbp)
@@ -766,7 +848,7 @@ CheckingAccount.withdraw:
 	movq -72(%rbp), %rdx
 	movq (%rdx), %rcx
 	movq %rcx, -80(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -88(%rbp)
 	movq -80(%rbp), %rcx
 	movq -88(%rbp), %rdx
@@ -804,7 +886,7 @@ CheckingAccount.withdraw:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -112(%rbp)
 	pushq %rax
 	pushq %rcx
@@ -833,7 +915,7 @@ CheckingAccount.withdraw:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -120(%rbp)
 	movq -120(%rbp), %rdx
 	movq %rdx, -128(%rbp)
@@ -903,11 +985,22 @@ L2:
 	popq %rcx
 	popq %rax
 L3:
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 main:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $192, %rsp
 	lea str7(%rip), %rdx
@@ -1334,7 +1427,13 @@ main:
 	popq %rcx
 	popq %rax
 	movq $0, %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 print_int:

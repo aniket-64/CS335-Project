@@ -24,9 +24,14 @@ str12: .asciz "Model 3"
 
 Vehicle.__init__:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $72, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -16(%rbp)
@@ -34,12 +39,12 @@ Vehicle.__init__:
 	movq -16(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -16(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -24(%rbp)
 	movq -16(%rbp), %rdx
 	movq -24(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -32(%rbp)
 	movq -32(%rbp), %rdx
 	movq %rdx, -40(%rbp)
@@ -47,12 +52,12 @@ Vehicle.__init__:
 	movq -40(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -40(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -48(%rbp)
 	movq -40(%rbp), %rdx
 	movq -48(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -56(%rbp)
 	movq -56(%rbp), %rdx
 	movq %rdx, -64(%rbp)
@@ -60,16 +65,27 @@ Vehicle.__init__:
 	movq -64(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -64(%rbp)
-	movq 40(%rbp), %rdx
+	movq 80(%rbp), %rdx
 	movq %rdx, -72(%rbp)
 	movq -64(%rbp), %rdx
 	movq -72(%rbp), %rcx
 	movq %rcx, (%rdx)
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Vehicle.display_info_veh:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $104, %rsp
 	lea str0(%rip), %rdx
@@ -130,7 +146,7 @@ Vehicle.display_info_veh:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -24(%rbp)
 	movq -24(%rbp), %rdx
 	movq %rdx, -32(%rbp)
@@ -197,7 +213,7 @@ Vehicle.display_info_veh:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -56(%rbp)
 	movq -56(%rbp), %rdx
 	movq %rdx, -64(%rbp)
@@ -264,7 +280,7 @@ Vehicle.display_info_veh:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -88(%rbp)
 	movq -88(%rbp), %rdx
 	movq %rdx, -96(%rbp)
@@ -302,14 +318,25 @@ Vehicle.display_info_veh:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Car.__init__:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $96, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -16(%rbp)
@@ -317,12 +344,12 @@ Car.__init__:
 	movq -16(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -16(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -24(%rbp)
 	movq -16(%rbp), %rdx
 	movq -24(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -32(%rbp)
 	movq -32(%rbp), %rdx
 	movq %rdx, -40(%rbp)
@@ -330,12 +357,12 @@ Car.__init__:
 	movq -40(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -40(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -48(%rbp)
 	movq -40(%rbp), %rdx
 	movq -48(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -56(%rbp)
 	movq -56(%rbp), %rdx
 	movq %rdx, -64(%rbp)
@@ -343,12 +370,12 @@ Car.__init__:
 	movq -64(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -64(%rbp)
-	movq 40(%rbp), %rdx
+	movq 80(%rbp), %rdx
 	movq %rdx, -72(%rbp)
 	movq -64(%rbp), %rdx
 	movq -72(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -80(%rbp)
 	movq -80(%rbp), %rdx
 	movq %rdx, -88(%rbp)
@@ -356,19 +383,30 @@ Car.__init__:
 	movq -88(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -88(%rbp)
-	movq 48(%rbp), %rdx
+	movq 88(%rbp), %rdx
 	movq %rdx, -96(%rbp)
 	movq -88(%rbp), %rdx
 	movq -96(%rbp), %rcx
 	movq %rcx, (%rdx)
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Car.display_info_car:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $40, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	pushq %rax
 	pushq %rcx
@@ -426,7 +464,7 @@ Car.display_info_car:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -24(%rbp)
 	movq -24(%rbp), %rdx
 	movq %rdx, -32(%rbp)
@@ -464,14 +502,25 @@ Car.display_info_car:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 ElectricCar.__init__:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $120, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -16(%rbp)
@@ -479,12 +528,12 @@ ElectricCar.__init__:
 	movq -16(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -16(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -24(%rbp)
 	movq -16(%rbp), %rdx
 	movq -24(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -32(%rbp)
 	movq -32(%rbp), %rdx
 	movq %rdx, -40(%rbp)
@@ -492,12 +541,12 @@ ElectricCar.__init__:
 	movq -40(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -40(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -48(%rbp)
 	movq -40(%rbp), %rdx
 	movq -48(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -56(%rbp)
 	movq -56(%rbp), %rdx
 	movq %rdx, -64(%rbp)
@@ -505,12 +554,12 @@ ElectricCar.__init__:
 	movq -64(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -64(%rbp)
-	movq 40(%rbp), %rdx
+	movq 80(%rbp), %rdx
 	movq %rdx, -72(%rbp)
 	movq -64(%rbp), %rdx
 	movq -72(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -80(%rbp)
 	movq -80(%rbp), %rdx
 	movq %rdx, -88(%rbp)
@@ -518,12 +567,12 @@ ElectricCar.__init__:
 	movq -88(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -88(%rbp)
-	movq 48(%rbp), %rdx
+	movq 88(%rbp), %rdx
 	movq %rdx, -96(%rbp)
 	movq -88(%rbp), %rdx
 	movq -96(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -104(%rbp)
 	movq -104(%rbp), %rdx
 	movq %rdx, -112(%rbp)
@@ -531,19 +580,30 @@ ElectricCar.__init__:
 	movq -112(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -112(%rbp)
-	movq 56(%rbp), %rdx
+	movq 96(%rbp), %rdx
 	movq %rdx, -120(%rbp)
 	movq -112(%rbp), %rdx
 	movq -120(%rbp), %rcx
 	movq %rcx, (%rdx)
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 ElectricCar.display_info_elec:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $40, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	pushq %rax
 	pushq %rcx
@@ -601,7 +661,7 @@ ElectricCar.display_info_elec:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -24(%rbp)
 	movq -24(%rbp), %rdx
 	movq %rdx, -32(%rbp)
@@ -639,11 +699,22 @@ ElectricCar.display_info_elec:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 main:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $128, %rsp
 	lea str6(%rip), %rdx
@@ -888,7 +959,13 @@ main:
 	popq %rcx
 	popq %rax
 	movq $0, %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 print_int:

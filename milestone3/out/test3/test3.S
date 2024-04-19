@@ -15,9 +15,14 @@ str3: .asciz "No solution exists."
 
 Solution.__init__:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $24, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -16(%rbp)
@@ -30,11 +35,22 @@ Solution.__init__:
 	movq -16(%rbp), %rdx
 	movq -24(%rbp), %rcx
 	movq %rcx, (%rdx)
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Solution.printGrid:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $144, %rsp
 	movq $0, %rdx
@@ -93,7 +109,7 @@ L3:
 	movq -80(%rbp), %rdx
 	cmpq $0, %rdx
 	je L4
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -88(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -96(%rbp)
@@ -189,11 +205,22 @@ L4:
 	popq %rax
 	jmp L0
 L5:
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Solution.used_in_row:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $120, %rsp
 	movq $0, %rdx
@@ -224,9 +251,9 @@ L7:
 	movq -40(%rbp), %rdx
 	cmpq $0, %rdx
 	je L9
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -48(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -56(%rbp)
 	movq $8, %rcx
 	movq -56(%rbp), %rdx
@@ -260,7 +287,7 @@ L7:
 	movq -88(%rbp), %rdx
 	movq (%rdx), %rcx
 	movq %rcx, -96(%rbp)
-	movq 40(%rbp), %rdx
+	movq 80(%rbp), %rdx
 	movq %rdx, -104(%rbp)
 	movq -96(%rbp), %rdx
 	movq -104(%rbp), %rcx
@@ -274,7 +301,13 @@ L7:
 	movq $1, %rdx
 	movq %rdx, -112(%rbp)
 	movq -112(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 	jmp L8
 L8:
@@ -283,11 +316,22 @@ L9:
 	movq $0, %rdx
 	movq %rdx, -120(%rbp)
 	movq -120(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Solution.used_in_col:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $120, %rsp
 	movq $0, %rdx
@@ -318,7 +362,7 @@ L11:
 	movq -40(%rbp), %rdx
 	cmpq $0, %rdx
 	je L13
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -48(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -56(%rbp)
@@ -337,7 +381,7 @@ L11:
 	movq -64(%rbp), %rdx
 	movq (%rdx), %rcx
 	movq %rcx, -72(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -80(%rbp)
 	movq $8, %rcx
 	movq -80(%rbp), %rdx
@@ -354,7 +398,7 @@ L11:
 	movq -88(%rbp), %rdx
 	movq (%rdx), %rcx
 	movq %rcx, -96(%rbp)
-	movq 40(%rbp), %rdx
+	movq 80(%rbp), %rdx
 	movq %rdx, -104(%rbp)
 	movq -96(%rbp), %rdx
 	movq -104(%rbp), %rcx
@@ -368,7 +412,13 @@ L11:
 	movq $1, %rdx
 	movq %rdx, -112(%rbp)
 	movq -112(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 	jmp L12
 L12:
@@ -377,11 +427,22 @@ L13:
 	movq $0, %rdx
 	movq %rdx, -120(%rbp)
 	movq -120(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Solution.used_in_box:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $176, %rsp
 	movq $0, %rdx
@@ -440,11 +501,11 @@ L17:
 	movq -80(%rbp), %rdx
 	cmpq $0, %rdx
 	je L19
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -88(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -96(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -104(%rbp)
 	movq -96(%rbp), %rcx
 	movq -104(%rbp), %rdx
@@ -467,7 +528,7 @@ L17:
 	movq %rcx, -120(%rbp)
 	movq -16(%rbp), %rdx
 	movq %rdx, -128(%rbp)
-	movq 40(%rbp), %rdx
+	movq 80(%rbp), %rdx
 	movq %rdx, -136(%rbp)
 	movq -128(%rbp), %rcx
 	movq -136(%rbp), %rdx
@@ -488,7 +549,7 @@ L17:
 	movq -144(%rbp), %rdx
 	movq (%rdx), %rcx
 	movq %rcx, -152(%rbp)
-	movq 48(%rbp), %rdx
+	movq 88(%rbp), %rdx
 	movq %rdx, -160(%rbp)
 	movq -152(%rbp), %rdx
 	movq -160(%rbp), %rcx
@@ -502,7 +563,13 @@ L17:
 	movq $1, %rdx
 	movq %rdx, -168(%rbp)
 	movq -168(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 	jmp L18
 L18:
@@ -513,20 +580,31 @@ L20:
 	movq $0, %rdx
 	movq %rdx, -176(%rbp)
 	movq -176(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Solution.check_location_is_safe:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $160, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -16(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -24(%rbp)
-	movq 48(%rbp), %rdx
+	movq 88(%rbp), %rdx
 	movq %rdx, -32(%rbp)
 	pushq %rax
 	pushq %rcx
@@ -566,13 +644,13 @@ Solution.check_location_is_safe:
 	movq $1, %rdx
 	xorq %rdx, %rcx
 	movq %rcx, -40(%rbp)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -48(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -56(%rbp)
-	movq 40(%rbp), %rdx
+	movq 80(%rbp), %rdx
 	movq %rdx, -64(%rbp)
-	movq 48(%rbp), %rdx
+	movq 88(%rbp), %rdx
 	movq %rdx, -72(%rbp)
 	pushq %rax
 	pushq %rcx
@@ -616,13 +694,13 @@ Solution.check_location_is_safe:
 	movq -80(%rbp), %rdx
 	andq %rdx, %rcx
 	movq %rcx, -40(%rbp)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -88(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -96(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -104(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -112(%rbp)
 	movq $3, %rdx
 	movq %rdx, -120(%rbp)
@@ -635,9 +713,9 @@ Solution.check_location_is_safe:
 	movq -112(%rbp), %rdx
 	subq %rdx, %rcx
 	movq %rcx, -104(%rbp)
-	movq 40(%rbp), %rdx
+	movq 80(%rbp), %rdx
 	movq %rdx, -128(%rbp)
-	movq 40(%rbp), %rdx
+	movq 80(%rbp), %rdx
 	movq %rdx, -136(%rbp)
 	movq $3, %rdx
 	movq %rdx, -144(%rbp)
@@ -650,7 +728,7 @@ Solution.check_location_is_safe:
 	movq -136(%rbp), %rdx
 	subq %rdx, %rcx
 	movq %rcx, -128(%rbp)
-	movq 48(%rbp), %rdx
+	movq 88(%rbp), %rdx
 	movq %rdx, -152(%rbp)
 	pushq %rax
 	pushq %rcx
@@ -697,11 +775,22 @@ Solution.check_location_is_safe:
 	andq %rdx, %rcx
 	movq %rcx, -40(%rbp)
 	movq -40(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Solution.find_empty_location:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $240, %rsp
 	movq $0, %rdx
@@ -760,7 +849,7 @@ L24:
 	movq -80(%rbp), %rdx
 	cmpq $0, %rdx
 	je L26
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -88(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -96(%rbp)
@@ -807,7 +896,7 @@ L24:
 	movq -136(%rbp), %rdx
 	cmpq $0, %rdx
 	je L25
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -152(%rbp)
 	movq $0, %rdx
 	movq %rdx, -160(%rbp)
@@ -831,7 +920,7 @@ L24:
 	movq -168(%rbp), %rdx
 	movq -184(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -192(%rbp)
 	movq $1, %rdx
 	movq %rdx, -200(%rbp)
@@ -858,7 +947,13 @@ L24:
 	movq $1, %rdx
 	movq %rdx, -232(%rbp)
 	movq -232(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 	jmp L25
 L25:
@@ -869,11 +964,22 @@ L27:
 	movq $0, %rdx
 	movq %rdx, -240(%rbp)
 	movq -240(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Solution.SolveSudoku:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $424, %rsp
 	movq $0, %rdx
@@ -931,9 +1037,9 @@ Solution.SolveSudoku:
 	movq %rcx, (%rdx)
 	movq -56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -72(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -80(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -88(%rbp)
@@ -979,7 +1085,13 @@ Solution.SolveSudoku:
 	movq $1, %rdx
 	movq %rdx, -104(%rbp)
 	movq -104(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 	jmp L28
 L28:
@@ -1055,9 +1167,9 @@ L30:
 	movq -208(%rbp), %rdx
 	cmpq $0, %rdx
 	je L33
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -216(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -224(%rbp)
 	movq -16(%rbp), %rdx
 	movq %rdx, -232(%rbp)
@@ -1104,7 +1216,7 @@ L30:
 	movq -256(%rbp), %rdx
 	cmpq $0, %rdx
 	je L32
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -264(%rbp)
 	movq -16(%rbp), %rdx
 	movq %rdx, -272(%rbp)
@@ -1145,9 +1257,9 @@ L30:
 	movq -304(%rbp), %rdx
 	movq -320(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -328(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -336(%rbp)
 	pushq %rax
 	pushq %rcx
@@ -1185,11 +1297,17 @@ L30:
 	movq $1, %rdx
 	movq %rdx, -352(%rbp)
 	movq -352(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 	jmp L31
 L31:
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -360(%rbp)
 	movq -16(%rbp), %rdx
 	movq %rdx, -368(%rbp)
@@ -1237,11 +1355,22 @@ L33:
 	movq $0, %rdx
 	movq %rdx, -424(%rbp)
 	movq -424(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 main:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $888, %rsp
 	movq $3, %rdx
@@ -2579,7 +2708,13 @@ L34:
 	popq %rax
 L35:
 	movq $0, %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 print_int:

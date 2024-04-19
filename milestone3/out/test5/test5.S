@@ -24,6 +24,11 @@ str12: .asciz "Square"
 
 basics:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $1136, %rsp
 	movq $10, %rdx
@@ -1308,14 +1313,25 @@ basics:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 check_number:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $64, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq $0, %rdx
 	movq %rdx, -16(%rbp)
@@ -1331,11 +1347,17 @@ check_number:
 	lea str5(%rip), %rdx
 	movq %rdx, -24(%rbp)
 	movq -24(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 	jmp L2
 L0:
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -32(%rbp)
 	movq $0, %rdx
 	movq %rdx, -40(%rbp)
@@ -1351,24 +1373,47 @@ L0:
 	lea str6(%rip), %rdx
 	movq %rdx, -48(%rbp)
 	movq -48(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 	jmp L2
 L1:
 	lea str7(%rip), %rdx
 	movq %rdx, -56(%rbp)
 	movq -56(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 L2:
 	lea str8(%rip), %rdx
 	movq %rdx, -64(%rbp)
 	movq -64(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 sum_of_numbers:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $104, %rsp
 	movq $0, %rdx
@@ -1381,7 +1426,7 @@ sum_of_numbers:
 	movq %rdx, -32(%rbp)
 	movq $1, %rdx
 	movq %rdx, -40(%rbp)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -48(%rbp)
 	movq $1, %rdx
 	movq %rdx, -56(%rbp)
@@ -1426,11 +1471,22 @@ L5:
 	movq -8(%rbp), %rdx
 	movq %rdx, -104(%rbp)
 	movq -104(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 even_numbers:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $264, %rsp
 	movq $0, %rdx
@@ -1567,7 +1623,7 @@ even_numbers:
 L6:
 	movq -16(%rbp), %rdx
 	movq %rdx, -128(%rbp)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -136(%rbp)
 	movq -128(%rbp), %rdx
 	movq -136(%rbp), %rcx
@@ -1667,11 +1723,22 @@ L10:
 	movq -8(%rbp), %rdx
 	movq %rdx, -264(%rbp)
 	movq -264(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 calculate_sum:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $192, %rsp
 	movq $10, %rdx
@@ -1994,14 +2061,25 @@ L12:
 	popq %rax
 	jmp L11
 L13:
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 factorial:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $64, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq $1, %rdx
 	movq %rdx, -16(%rbp)
@@ -2017,13 +2095,19 @@ factorial:
 	movq $1, %rdx
 	movq %rdx, -24(%rbp)
 	movq -24(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 	jmp L15
 L14:
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -32(%rbp)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -40(%rbp)
 	movq $1, %rdx
 	movq %rdx, -48(%rbp)
@@ -2064,7 +2148,13 @@ L14:
 	imulq %rdx, %rcx
 	movq %rcx, -32(%rbp)
 	movq -32(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 L15:
 	movq $1, %rdx
@@ -2073,14 +2163,25 @@ L15:
 	neg %rdx
 	movq %rdx, -64(%rbp)
 	movq -64(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Shape.__init__:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $24, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -16(%rbp)
@@ -2088,19 +2189,30 @@ Shape.__init__:
 	movq -16(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -16(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -24(%rbp)
 	movq -16(%rbp), %rdx
 	movq -24(%rbp), %rcx
 	movq %rcx, (%rdx)
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Shape.get_name:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $24, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -16(%rbp)
@@ -2112,14 +2224,25 @@ Shape.get_name:
 	movq (%rdx), %rcx
 	movq %rcx, -24(%rbp)
 	movq -24(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Square.__init__:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $48, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -16(%rbp)
@@ -2127,12 +2250,12 @@ Square.__init__:
 	movq -16(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -16(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -24(%rbp)
 	movq -16(%rbp), %rdx
 	movq -24(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -32(%rbp)
 	movq -32(%rbp), %rdx
 	movq %rdx, -40(%rbp)
@@ -2140,19 +2263,30 @@ Square.__init__:
 	movq -40(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -40(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -48(%rbp)
 	movq -40(%rbp), %rdx
 	movq -48(%rbp), %rcx
 	movq %rcx, (%rdx)
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Square.area:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $32, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -16(%rbp)
@@ -2182,36 +2316,69 @@ Square.area:
 	popq %rax
 	popq %rdx
 	movq -24(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Math.__init__:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $8, %rsp
 	movq $1, %rdx
 	movq %rdx, -8(%rbp)
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 Math.add:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $16, %rsp
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -8(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -16(%rbp)
 	movq -8(%rbp), %rcx
 	movq -16(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -8(%rbp)
 	movq -8(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 main:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $136, %rsp
 	movq $5, %rdx
@@ -2631,7 +2798,13 @@ main:
 	popq %rcx
 	popq %rax
 	movq $0, %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 print_int:

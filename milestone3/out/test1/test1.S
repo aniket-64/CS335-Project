@@ -11,11 +11,16 @@ format_print_false: .asciz "False\n"
 
 swap:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $144, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -16(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -24(%rbp)
 	movq $8, %rcx
 	movq -24(%rbp), %rdx
@@ -34,9 +39,9 @@ swap:
 	movq %rcx, -40(%rbp)
 	movq -40(%rbp), %rdx
 	movq %rdx, -8(%rbp)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -48(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -56(%rbp)
 	movq $8, %rcx
 	movq -56(%rbp), %rdx
@@ -53,9 +58,9 @@ swap:
 	movq -64(%rbp), %rdx
 	movq (%rdx), %rcx
 	movq %rcx, -72(%rbp)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -80(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -88(%rbp)
 	movq $8, %rcx
 	movq -88(%rbp), %rdx
@@ -75,9 +80,9 @@ swap:
 	movq -64(%rbp), %rdx
 	movq -104(%rbp), %rcx
 	movq %rcx, (%rdx)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -112(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -120(%rbp)
 	movq $8, %rcx
 	movq -120(%rbp), %rdx
@@ -99,16 +104,27 @@ swap:
 	movq -128(%rbp), %rdx
 	movq -144(%rbp), %rcx
 	movq %rcx, (%rdx)
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 partition:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $536, %rsp
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -48(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -56(%rbp)
 	movq $8, %rcx
 	movq -56(%rbp), %rdx
@@ -135,7 +151,7 @@ partition:
 	movq %rdx, -24(%rbp)
 	movq -24(%rbp), %rdx
 	movq %rdx, -88(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -96(%rbp)
 	movq $1, %rdx
 	movq %rdx, -104(%rbp)
@@ -143,7 +159,7 @@ partition:
 	movq -104(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -96(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -112(%rbp)
 	movq $1, %rdx
 	movq %rdx, -120(%rbp)
@@ -173,7 +189,7 @@ L1:
 	movq -136(%rbp), %rdx
 	cmpq $0, %rdx
 	je L3
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -144(%rbp)
 	movq -24(%rbp), %rdx
 	movq %rdx, -152(%rbp)
@@ -217,7 +233,7 @@ L1:
 L2:
 	jmp L0
 L3:
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -208(%rbp)
 	movq -16(%rbp), %rdx
 	movq %rdx, -216(%rbp)
@@ -227,11 +243,11 @@ L3:
 	movq %rcx, -208(%rbp)
 	movq -208(%rbp), %rdx
 	movq %rdx, -32(%rbp)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -224(%rbp)
 	movq -32(%rbp), %rdx
 	movq %rdx, -232(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -240(%rbp)
 	pushq %rax
 	pushq %rcx
@@ -266,11 +282,11 @@ L3:
 	popq %rax
 	movq -24(%rbp), %rdx
 	movq %rdx, -248(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -256(%rbp)
 	movq -256(%rbp), %rdx
 	movq %rdx, -24(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -264(%rbp)
 	movq -264(%rbp), %rdx
 	movq %rdx, -40(%rbp)
@@ -303,7 +319,7 @@ L4:
 	cmpq $0, %rdx
 	je L10
 L5:
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -304(%rbp)
 	movq -24(%rbp), %rdx
 	movq %rdx, -312(%rbp)
@@ -346,7 +362,7 @@ L5:
 	jmp L5
 L6:
 L7:
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -368(%rbp)
 	movq -40(%rbp), %rdx
 	movq %rdx, -376(%rbp)
@@ -415,7 +431,7 @@ L8:
 	movq -432(%rbp), %rdx
 	cmpq $0, %rdx
 	je L9
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -464(%rbp)
 	movq -24(%rbp), %rdx
 	movq %rdx, -472(%rbp)
@@ -479,16 +495,27 @@ L10:
 	movq -32(%rbp), %rdx
 	movq %rdx, -536(%rbp)
 	movq -536(%rbp), %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 quickSort:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $120, %rsp
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -16(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -24(%rbp)
 	movq -16(%rbp), %rdx
 	movq -24(%rbp), %rcx
@@ -499,15 +526,21 @@ quickSort:
 	movq -16(%rbp), %rdx
 	cmpq $0, %rdx
 	je L11
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 	jmp L11
 L11:
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -32(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -40(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -48(%rbp)
 	pushq %rax
 	pushq %rcx
@@ -543,9 +576,9 @@ L11:
 	popq %rax
 	movq -56(%rbp), %rdx
 	movq %rdx, -8(%rbp)
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -64(%rbp)
-	movq 24(%rbp), %rdx
+	movq 64(%rbp), %rdx
 	movq %rdx, -72(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -80(%rbp)
@@ -586,7 +619,7 @@ L11:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	movq 16(%rbp), %rdx
+	movq 56(%rbp), %rdx
 	movq %rdx, -96(%rbp)
 	movq -8(%rbp), %rdx
 	movq %rdx, -104(%rbp)
@@ -596,7 +629,7 @@ L11:
 	movq -112(%rbp), %rdx
 	addq %rdx, %rcx
 	movq %rcx, -104(%rbp)
-	movq 32(%rbp), %rdx
+	movq 72(%rbp), %rdx
 	movq %rdx, -120(%rbp)
 	pushq %rax
 	pushq %rcx
@@ -629,11 +662,22 @@ L11:
 	popq %rdx
 	popq %rcx
 	popq %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 main:
 	pushq %rbp
+	pushq %rbx
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
 	movq %rsp, %rbp
 	subq $200, %rsp
 	movq $9, %rdx
@@ -854,7 +898,13 @@ L13:
 	jmp L12
 L14:
 	movq $0, %rax
-	leave
+	movq %rbp, %rsp
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+	popq %rbx
+	popq %rbp
 	ret
 
 print_int:
