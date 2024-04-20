@@ -64,7 +64,7 @@ void resolve_names(vector<quad> &tac_func)
                         offset_calc+=8;
                     else
                     {
-                        offset_calc+=temp.op2_entry->container_st->size_of_params+16;
+                        offset_calc+=temp.op2_entry->container_st->size_of_params+16+40;
                         offset_calc=-offset_calc;
                     }
                     if(offset_calc > 0) 
@@ -103,7 +103,7 @@ void resolve_names(vector<quad> &tac_func)
                         offset_calc+=8;
                     else
                     {
-                        offset_calc+=temp.target_entry->container_st->size_of_params+16;
+                        offset_calc+=temp.target_entry->container_st->size_of_params+16+40;
                         offset_calc=-offset_calc;
                     }
 
